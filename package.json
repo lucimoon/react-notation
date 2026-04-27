@@ -7,8 +7,8 @@
     "test": "turbo test",
     "test:coverage": "turbo test:coverage",
     "lint": "turbo lint",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "sb": "storybook dev -p 6006",
+    "sb:build": "storybook build"
   },
   "pnpm": {
     "onlyBuiltDependencies": ["core-js", "esbuild"],

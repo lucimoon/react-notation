@@ -46,7 +46,7 @@ pnpm --filter core dev
 pnpm --filter docs dev
 
 # Storybook
-pnpm storybook
+pnpm sb
 ```
 
 ---
