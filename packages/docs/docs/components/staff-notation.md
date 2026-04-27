@@ -1,5 +1,4 @@
 ---
-id: components/staff-notation
 sidebar_position: 6
 ---
 

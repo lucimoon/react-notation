@@ -1,5 +1,4 @@
 ---
-id: components/theme-provider
 sidebar_position: 9
 ---
 

@@ -1,5 +1,4 @@
 ---
-id: guides/getting-started
 sidebar_position: 1
 ---
 

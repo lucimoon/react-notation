@@ -1,5 +1,4 @@
 ---
-id: components/tablature
 sidebar_position: 5
 ---
 

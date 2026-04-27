@@ -1,5 +1,4 @@
 ---
-id: data-model
 sidebar_position: 2
 ---
 

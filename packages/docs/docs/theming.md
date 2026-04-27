@@ -1,5 +1,4 @@
 ---
-id: theming
 sidebar_position: 3
 ---
 

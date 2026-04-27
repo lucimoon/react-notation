@@ -1,5 +1,4 @@
 ---
-id: components/chord-diagram
 sidebar_position: 3
 ---
 

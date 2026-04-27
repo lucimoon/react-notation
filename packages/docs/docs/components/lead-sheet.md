@@ -1,5 +1,4 @@
 ---
-id: components/lead-sheet
 sidebar_position: 4
 ---
 

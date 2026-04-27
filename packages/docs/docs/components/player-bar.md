@@ -1,5 +1,4 @@
 ---
-id: components/player-bar
 sidebar_position: 7
 ---
 

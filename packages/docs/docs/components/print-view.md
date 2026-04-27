@@ -1,5 +1,4 @@
 ---
-id: components/print-view
 sidebar_position: 8
 ---
 

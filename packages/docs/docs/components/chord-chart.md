@@ -1,5 +1,4 @@
 ---
-id: components/chord-chart
 sidebar_position: 2
 ---
 

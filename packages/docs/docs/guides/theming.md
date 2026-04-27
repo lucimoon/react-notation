@@ -1,5 +1,4 @@
 ---
-id: guides/theming
 sidebar_position: 2
 ---
 
