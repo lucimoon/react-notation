@@ -8,7 +8,7 @@ components) in `<ThemeProvider>` to apply a theme, or override individual tokens
 ## ThemeProvider
 
 ```tsx
-import { ThemeProvider } from "stave"
+import { ThemeProvider } from "react-notation"
 
 <ThemeProvider theme={myTheme}>
   <ChordSheet score={score} />
@@ -25,41 +25,41 @@ Without a `theme` prop, the default theme is applied.
 
 | Token | Default | Description |
 |---|---|---|
-| `--stave-font-notation` | `"Bravura", serif` | SMuFL-compatible music font |
-| `--stave-font-text` | `system-ui, sans-serif` | Lyrics, labels, chord symbols |
-| `--stave-font-mono` | `"Courier New", monospace` | Tab fret numbers |
-| `--stave-font-size-base` | `16px` | Base size; other sizes scale from this |
-| `--stave-font-size-chord` | `0.9em` | Chord symbol size |
-| `--stave-font-size-lyric` | `1em` | Lyric text size |
-| `--stave-font-size-label` | `0.75em` | Section labels, rehearsal marks |
+| `--notation-font-notation` | `"Bravura", serif` | SMuFL-compatible music font |
+| `--notation-font-text` | `system-ui, sans-serif` | Lyrics, labels, chord symbols |
+| `--notation-font-mono` | `"Courier New", monospace` | Tab fret numbers |
+| `--notation-font-size-base` | `16px` | Base size; other sizes scale from this |
+| `--notation-font-size-chord` | `0.9em` | Chord symbol size |
+| `--notation-font-size-lyric` | `1em` | Lyric text size |
+| `--notation-font-size-label` | `0.75em` | Section labels, rehearsal marks |
 
 ### Layout
 
 | Token | Default | Description |
 |---|---|---|
-| `--stave-staff-line-gap` | `8px` | Space between staff lines |
-| `--stave-measure-padding` | `12px` | Horizontal padding inside a measure |
-| `--stave-system-gap` | `48px` | Vertical gap between systems (rows) |
-| `--stave-chord-offset` | `-1.5em` | Vertical offset of chord symbols above text |
+| `--notation-staff-line-gap` | `8px` | Space between staff lines |
+| `--notation-measure-padding` | `12px` | Horizontal padding inside a measure |
+| `--notation-system-gap` | `48px` | Vertical gap between systems (rows) |
+| `--notation-chord-offset` | `-1.5em` | Vertical offset of chord symbols above text |
 
 ### Color
 
 | Token | Default | Description |
 |---|---|---|
-| `--stave-color-ink` | `#1a1a1a` | Notes, barlines, stems |
-| `--stave-color-staff` | `#555555` | Staff lines |
-| `--stave-color-chord` | `#1a4fa3` | Chord symbol text |
-| `--stave-color-lyric` | `#1a1a1a` | Lyric text |
-| `--stave-color-label` | `#888888` | Section labels |
-| `--stave-color-highlight` | `#f0c040` | Active note/measure during playback |
-| `--stave-color-background` | `transparent` | Component background |
+| `--notation-color-ink` | `#1a1a1a` | Notes, barlines, stems |
+| `--notation-color-staff` | `#555555` | Staff lines |
+| `--notation-color-chord` | `#1a4fa3` | Chord symbol text |
+| `--notation-color-lyric` | `#1a1a1a` | Lyric text |
+| `--notation-color-label` | `#888888` | Section labels |
+| `--notation-color-highlight` | `#f0c040` | Active note/measure during playback |
+| `--notation-color-background` | `transparent` | Component background |
 
 ---
 
 ## Custom theme object
 
 ```ts
-import { defineTheme } from "stave"
+import { defineTheme } from "react-notation"
 
 const darkTheme = defineTheme({
   "color-ink":        "#e8e8e8",
@@ -70,7 +70,7 @@ const darkTheme = defineTheme({
 })
 ```
 
-`defineTheme` accepts any subset of token names (without the `--stave-` prefix) and merges
+`defineTheme` accepts any subset of token names (without the `--notation-` prefix) and merges
 with the default theme.
 
 ---
@@ -79,8 +79,8 @@ with the default theme.
 
 ```css
 .my-chart {
-  --stave-color-chord: #c0392b;
-  --stave-font-size-chord: 1.1em;
+  --notation-color-chord: #c0392b;
+  --notation-font-size-chord: 1.1em;
 }
 ```
 
@@ -97,8 +97,8 @@ All tokens apply under `@media print`. To override specifically for print:
 ```css
 @media print {
   :root {
-    --stave-color-highlight: transparent;
-    --stave-font-size-base: 14px;
+    --notation-color-highlight: transparent;
+    --notation-font-size-base: 14px;
   }
 }
 ```

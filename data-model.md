@@ -160,7 +160,7 @@ type Barline = "single" | "double" | "final" | "repeat-start" | "repeat-end"
 Rather than constructing raw objects, use the builder helpers:
 
 ```ts
-import { createScore, createTrack, createMeasure, createNote, createChord } from "stave"
+import { createScore, createTrack, createMeasure, createNote, createChord } from "react-notation"
 
 const score = createScore({
   title: "Autumn Leaves",
@@ -186,8 +186,8 @@ const score = createScore({
 ## Import utilities (Milestone 3+)
 
 ```ts
-import { fromMusicXML } from "stave/import"
-import { fromABC }       from "stave/import"  // post-1.0
+import { fromMusicXML } from "react-notation/import"
+import { fromABC }       from "react-notation/import"  // post-1.0
 
 const score = await fromMusicXML(xmlString)
 ```

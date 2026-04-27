@@ -3,7 +3,7 @@
 ## Repo structure
 
 ```
-stave/
+react-notation/
 ├── packages/
 │   ├── core/               # The library itself
 │   │   ├── src/
@@ -32,8 +32,8 @@ stave/
 **Requirements:** Node 18+, pnpm 8+
 
 ```bash
-git clone https://github.com/your-org/stave
-cd stave
+git clone https://github.com/your-org/react-notation
+cd react-notation
 pnpm install
 
 # Run everything in dev
@@ -83,7 +83,7 @@ interface ChordChartProps extends React.HTMLAttributes<HTMLDivElement> {
 export const ChordChart = React.forwardRef<HTMLDivElement, ChordChartProps>(
   ({ score, showDiagrams = false, className, ...rest }, ref) => {
     return (
-      <div ref={ref} className={cx("stave-chord-chart", className)} {...rest}>
+      <div ref={ref} className={cx("notation-chord-chart", className)} {...rest}>
         {/* ... */}
       </div>
     )
@@ -93,7 +93,7 @@ ChordChart.displayName = "ChordChart"
 ```
 
 - All components are `forwardRef`
-- All CSS classes are prefixed `stave-`
+- All CSS classes are prefixed `notation-`
 - No hardcoded colors or sizes — use CSS token variables only
 - No external runtime dependencies beyond React
 
