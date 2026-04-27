@@ -1,2 +1,2 @@
-// Pure utility functions: chord parsing, duration math, key utils.
-// Milestone 1+ will fill this out.
+// Pure utility functions: chord parsing, duration math, key utils — filled out in Milestone 1+.
+export {}

@@ -10,11 +10,17 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["core-js", "esbuild"],
+    "overrides": {
+      "webpack": "5.98.0"
+    }
+  },
   "devDependencies": {
-    "@storybook/addon-essentials": "^8.6.12",
-    "@storybook/addon-interactions": "^8.6.12",
-    "@storybook/react": "^8.6.12",
-    "@storybook/react-vite": "^8.6.12",
+    "@storybook/addon-essentials": "^8.6.18",
+    "@storybook/addon-interactions": "^8.6.18",
+    "@storybook/react": "^8.6.18",
+    "@storybook/react-vite": "^8.6.18",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.5",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
