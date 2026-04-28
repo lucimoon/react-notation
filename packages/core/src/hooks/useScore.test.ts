@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useScore } from './useScore'
-import { createScore, createTrack, createMeasure, createChord, createLyric, createNote } from '../builders'
+import { createScore, createTrack, createMeasure, createChord, createLyric } from '../builders'
 
 function baseScore() {
   return createScore({

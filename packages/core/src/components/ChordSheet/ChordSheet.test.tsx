@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event'
 import { ChordSheet } from './ChordSheet'
 import { createScore, createTrack, createMeasure, createChord, createLyric } from '../../builders'
 import { useScore } from '../../hooks/useScore'
-import { renderHook, act } from '@testing-library/react'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

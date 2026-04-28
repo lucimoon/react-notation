@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { ChordSheet } from './ChordSheet'
 import { createScore, createTrack, createMeasure, createChord, createLyric } from '../../builders'
@@ -149,73 +149,81 @@ export const NoSectionBreaks: Story = {
 
 // ─── Interactive / editor stories ─────────────────────────────────────────────
 
+function InteractiveStory() {
+  const editor = useScore(autumnLeavesScore)
+  return <ChordSheet score={editor.score} editor={editor} />
+}
+
 export const Interactive: Story = {
   parameters: { layout: 'padded' },
-  render: () => {
-    const editor = useScore(autumnLeavesScore)
-    return <ChordSheet score={editor.score} editor={editor} />
-  },
+  render: () => <InteractiveStory />,
+}
+
+function WithUndoRedoStory() {
+  const editor = useScore(autumnLeavesScore)
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <button onClick={editor.undo} disabled={!editor.canUndo}>Undo</button>
+        <button onClick={editor.redo} disabled={!editor.canRedo}>Redo</button>
+      </div>
+      <ChordSheet score={editor.score} editor={editor} />
+    </div>
+  )
 }
 
 export const WithUndoRedo: Story = {
   parameters: { layout: 'padded' },
-  render: () => {
-    const editor = useScore(autumnLeavesScore)
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button onClick={editor.undo} disabled={!editor.canUndo}>Undo</button>
-          <button onClick={editor.redo} disabled={!editor.canRedo}>Redo</button>
-        </div>
-        <ChordSheet score={editor.score} editor={editor} />
-      </div>
-    )
-  },
+  render: () => <WithUndoRedoStory />,
+}
+
+function CustomPopupHookStory() {
+  const editor = useScore(autumnLeavesScore)
+  const [lastEvent, setLastEvent] = useState<Selection | null>(null)
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <ChordSheet
+        score={editor.score}
+        editor={editor}
+        inlineEdit={false}
+        onEditStart={(sel) => { setLastEvent(sel); return false }}
+      />
+      <pre style={{ fontSize: '0.8rem', background: '#f5f5f5', padding: '0.75rem', borderRadius: '4px' }}>
+        {lastEvent ? JSON.stringify(lastEvent, null, 2) : 'Press Enter on a chord to see onEditStart fire here'}
+      </pre>
+    </div>
+  )
 }
 
 export const CustomPopupHook: Story = {
   parameters: { layout: 'padded' },
-  render: () => {
-    const editor = useScore(autumnLeavesScore)
-    const [lastEvent, setLastEvent] = useState<Selection | null>(null)
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <ChordSheet
-          score={editor.score}
-          editor={editor}
-          inlineEdit={false}
-          onEditStart={(sel) => { setLastEvent(sel); return false }}
-        />
-        <pre style={{ fontSize: '0.8rem', background: '#f5f5f5', padding: '0.75rem', borderRadius: '4px' }}>
-          {lastEvent ? JSON.stringify(lastEvent, null, 2) : 'Press Enter on a chord to see onEditStart fire here'}
-        </pre>
-      </div>
-    )
-  },
+  render: () => <CustomPopupHookStory />,
+}
+
+function SelectionCallbacksStory() {
+  const editor = useScore(autumnLeavesScore)
+  const [log, setLog] = useState<Array<{ event: string; payload: unknown }>>([])
+  const push = (event: string, payload: unknown) =>
+    setLog((prev) => [{ event, payload }, ...prev].slice(0, 6))
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <ChordSheet
+        score={editor.score}
+        editor={editor}
+        onSelect={(sel) => push('onSelect', sel)}
+        onEditCommit={(sel, val) => push('onEditCommit', { ...sel, value: val })}
+        onEditCancel={(sel) => push('onEditCancel', sel)}
+      />
+      <pre style={{ fontSize: '0.8rem', background: '#f5f5f5', padding: '0.75rem', borderRadius: '4px', minHeight: '6rem' }}>
+        {log.length > 0
+          ? log.map((e) => `[${e.event}] ${JSON.stringify(e.payload)}`).join('\n')
+          : 'Click or Tab to a chord, press Enter to edit…'}
+      </pre>
+    </div>
+  )
 }
 
 export const SelectionCallbacks: Story = {
   parameters: { layout: 'padded' },
-  render: () => {
-    const editor = useScore(autumnLeavesScore)
-    const [log, setLog] = useState<Array<{ event: string; payload: unknown }>>([])
-    const push = (event: string, payload: unknown) =>
-      setLog((prev) => [{ event, payload }, ...prev].slice(0, 6))
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <ChordSheet
-          score={editor.score}
-          editor={editor}
-          onSelect={(sel) => push('onSelect', sel)}
-          onEditCommit={(sel, val) => push('onEditCommit', { ...sel, value: val })}
-          onEditCancel={(sel) => push('onEditCancel', sel)}
-        />
-        <pre style={{ fontSize: '0.8rem', background: '#f5f5f5', padding: '0.75rem', borderRadius: '4px', minHeight: '6rem' }}>
-          {log.length > 0
-            ? log.map((e, i) => `[${e.event}] ${JSON.stringify(e.payload)}`).join('\n')
-            : 'Click or Tab to a chord, press Enter to edit…'}
-        </pre>
-      </div>
-    )
-  },
+  render: () => <SelectionCallbacksStory />,
 }

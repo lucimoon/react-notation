@@ -153,7 +153,7 @@ function Beat({
     if (suppressed === false || !inlineEdit) return
     setEditValue(col.chord.symbol)
     setEditing(true)
-  }, [col.chord, measureId, editor, onEditStart, inlineEdit])
+  }, [col, measureId, editor, onEditStart, inlineEdit])
 
   const commitEdit = useCallback(() => {
     if (!editing || !col.chord) return
@@ -166,7 +166,7 @@ function Beat({
       )
     }
     setEditing(false)
-  }, [editing, col.chord, editValue, editor, onEditCommit, measureId])
+  }, [editing, col, editValue, editor, onEditCommit, measureId])
 
   const cancelEdit = useCallback(() => {
     if (!editing || !col.chord) return
@@ -178,7 +178,7 @@ function Beat({
       trackId: editor!.score.tracks[0]?.id ?? '',
       beat: col.beat,
     })
-  }, [editing, col.chord, onEditCancel, measureId, editor])
+  }, [editing, col, onEditCancel, measureId, editor])
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!interactive || !primaryId) return

@@ -2,12 +2,8 @@ import { useReducer, useState, useCallback } from 'react'
 import { createMeasure, createTrack } from '../builders'
 import type {
   MusicScore,
-  Track,
   Measure,
   Event,
-  Chord,
-  Lyric,
-  Note,
   ScoreEditor,
   Selection,
 } from '../types'
