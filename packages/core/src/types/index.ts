@@ -153,3 +153,42 @@ export interface MusicScore {
   tracks: Track[]
   metadata?: Record<string, unknown>
 }
+
+// ─── Editing ──────────────────────────────────────────────────────────────────
+
+export interface Selection {
+  type: 'chord' | 'lyric' | 'note' | 'rest' | 'measure' | 'beat'
+  id: string
+  measureId: string
+  trackId: string
+  beat?: number
+}
+
+export interface ScoreEditor {
+  score: MusicScore
+  selection: Selection | null
+
+  // Selection
+  select: (id: string | null) => void
+
+  // Event mutations
+  updateChord: (id: string, patch: Partial<Omit<Chord, 'id' | 'type'>>) => void
+  updateLyric: (id: string, patch: Partial<Omit<Lyric, 'id' | 'type'>>) => void
+  updateNote: (id: string, patch: Partial<Omit<Note, 'id' | 'type'>>) => void
+  updateMeasure: (id: string, patch: Partial<Omit<Measure, 'id'>>) => void
+  addEvent: (measureId: string, event: Event) => void
+  removeEvent: (id: string) => void
+  moveEvent: (id: string, toBeat: number) => void
+
+  // Structure mutations
+  addMeasure: (trackId: string, after?: string) => void
+  removeMeasure: (id: string) => void
+  addTrack: (after?: string) => void
+  removeTrack: (id: string) => void
+
+  // History
+  undo: () => void
+  redo: () => void
+  canUndo: boolean
+  canRedo: boolean
+}
