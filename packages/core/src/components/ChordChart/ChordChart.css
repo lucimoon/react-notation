@@ -1,0 +1,141 @@
+.notation-chord-chart {
+  font-family: var(--notation-font-family, Georgia, "Times New Roman", serif);
+  background: var(--notation-color-background, transparent);
+}
+
+/* ── Line (row of measures) ── */
+
+.notation-chart-line {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: var(--notation-line-gap, 1.5rem);
+  border-top: var(--notation-measure-border-width, 1px)
+    var(--notation-measure-border-style, solid)
+    var(--notation-color-measure-border, currentColor);
+  border-left: var(--notation-measure-border-width, 1px)
+    var(--notation-measure-border-style, solid)
+    var(--notation-color-measure-border, currentColor);
+}
+
+/* ── Section label ── */
+
+.notation-chart-section {
+  font-size: var(--notation-font-size-label, 0.75rem);
+  color: var(--notation-color-section-label, inherit);
+  font-style: italic;
+  margin-bottom: 0.25rem;
+  margin-top: var(--notation-section-gap, 2rem);
+}
+
+.notation-chart-section:first-child {
+  margin-top: 0;
+}
+
+/* ── Measure ── */
+
+.notation-chart-measure {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem 0.5rem 0.375rem;
+  border-right: var(--notation-measure-border-width, 1px)
+    var(--notation-measure-border-style, solid)
+    var(--notation-color-measure-border, currentColor);
+  border-bottom: var(--notation-measure-border-width, 1px)
+    var(--notation-measure-border-style, solid)
+    var(--notation-color-measure-border, currentColor);
+  gap: 0.25rem;
+  position: relative;
+}
+
+/* Measure number */
+.notation-chart-measure-number {
+  font-size: var(--notation-font-size-label, 0.75rem);
+  color: var(--notation-color-section-label, inherit);
+  opacity: 0.45;
+  line-height: 1;
+}
+
+/* Rehearsal mark box (e.g. [A], [Chorus]) */
+.notation-chart-rehearsal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--notation-measure-border-width, 1px)
+    var(--notation-measure-border-style, solid)
+    var(--notation-color-chord, currentColor);
+  font-size: var(--notation-font-size-label, 0.75rem);
+  font-weight: var(--notation-font-weight-chord, 600);
+  color: var(--notation-color-chord, inherit);
+  padding: 0 0.3em;
+  line-height: 1.5;
+  width: fit-content;
+}
+
+/* ── Chord row inside measure ── */
+
+.notation-chart-chord-row {
+  display: flex;
+  gap: var(--notation-beat-gap, 0.375rem);
+  align-items: baseline;
+  flex-wrap: nowrap;
+  min-height: 1.6em;
+}
+
+.notation-chart-chord {
+  font-size: var(--notation-font-size-chord, 1rem);
+  font-weight: var(--notation-font-weight-chord, 600);
+  color: var(--notation-color-chord, inherit);
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* ── Slash notation row ── */
+
+.notation-chart-slash-row {
+  display: flex;
+  gap: var(--notation-beat-gap, 0.375rem);
+  align-items: center;
+  min-height: 1.1em;
+}
+
+.notation-chart-slash {
+  flex: 1;
+  font-size: var(--notation-font-size-lyric, 0.9375rem);
+  color: var(--notation-color-lyric, inherit);
+  opacity: 0.5;
+  text-align: center;
+  font-style: italic;
+  user-select: none;
+}
+
+/* ── Repeat barlines ── */
+
+.notation-chart-measure[data-barline="repeat-end"]::after,
+.notation-chart-measure[data-barline="repeat-start"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--notation-color-measure-border, currentColor);
+}
+
+.notation-chart-measure[data-barline="repeat-end"]::after {
+  right: -1px;
+}
+
+.notation-chart-measure[data-barline="repeat-start"]::before {
+  left: -1px;
+}
+
+/* ── Double / final barlines ── */
+
+.notation-chart-line[data-final-barline="double"] {
+  border-right: 3px double var(--notation-color-measure-border, currentColor);
+}
+
+.notation-chart-line[data-final-barline="final"] {
+  border-right: 4px solid var(--notation-color-measure-border, currentColor);
+}
