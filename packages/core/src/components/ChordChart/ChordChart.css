@@ -139,3 +139,22 @@
 .notation-chart-line[data-final-barline="final"] {
   border-right: 4px solid var(--notation-color-measure-border, currentColor);
 }
+
+/* ── Interactive chord selection ── */
+
+.notation-chart-chord[tabindex] {
+  cursor: pointer;
+  border-radius: 2px;
+  outline: none;
+}
+
+.notation-chart-chord[data-notation-selected] {
+  background: var(--notation-color-selection-bg, rgba(99, 102, 241, 0.12));
+  outline: 2px solid var(--notation-color-selection, #6366f1);
+  outline-offset: 1px;
+}
+
+.notation-chart-chord[tabindex]:focus-visible {
+  outline: 2px solid var(--notation-color-selection, #6366f1);
+  outline-offset: 1px;
+}

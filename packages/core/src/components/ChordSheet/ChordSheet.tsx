@@ -4,7 +4,7 @@ import './ChordSheet.css'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export interface ChordSheetProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ChordSheetProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   score: MusicScore
   /**
    * Maximum number of measures to show on a single line before wrapping.

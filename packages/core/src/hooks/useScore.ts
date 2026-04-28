@@ -30,8 +30,8 @@ function mapEvents(
   }
 }
 
-function updateEventById(score: MusicScore, id: string, patch: Partial<Event>): MusicScore {
-  return mapEvents(score, (event) => (event.id === id ? { ...event, ...patch } : event))
+function updateEventById(score: MusicScore, id: string, patch: Record<string, unknown>): MusicScore {
+  return mapEvents(score, (event) => (event.id === id ? { ...event, ...patch } as Event : event))
 }
 
 function removeEventById(score: MusicScore, id: string): MusicScore {
@@ -201,15 +201,15 @@ export function useScore(initial: MusicScore): ScoreEditor {
     select,
 
     updateChord: useCallback((id, patch) => {
-      push(updateEventById(history.present, id, patch as Partial<Event>))
+      push(updateEventById(history.present, id, patch as Record<string, unknown>))
     }, [history.present, push]),
 
     updateLyric: useCallback((id, patch) => {
-      push(updateEventById(history.present, id, patch as Partial<Event>))
+      push(updateEventById(history.present, id, patch as Record<string, unknown>))
     }, [history.present, push]),
 
     updateNote: useCallback((id, patch) => {
-      push(updateEventById(history.present, id, patch as Partial<Event>))
+      push(updateEventById(history.present, id, patch as Record<string, unknown>))
     }, [history.present, push]),
 
     updateMeasure: useCallback((id, patch) => {
@@ -254,7 +254,4 @@ export function useScore(initial: MusicScore): ScoreEditor {
   }
 }
 
-// ─── Type re-exports for convenience ─────────────────────────────────────────
-
 export type { ScoreEditor, Selection }
-export type { Chord, Lyric, Note, Track, Measure }

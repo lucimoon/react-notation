@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { describe, it, expect, vi } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { ChordChart } from './ChordChart'
 import { createScore, createTrack, createMeasure, createChord } from '../../builders'
+import { useScore } from '../../hooks/useScore'
 
 function makeScore(measures: ReturnType<typeof createMeasure>[]) {
   return createScore({
@@ -110,5 +111,44 @@ describe('ChordChart', () => {
     const { container } = render(<ChordChart score={score} />)
     const measure = container.querySelector('[data-barline="repeat-end"]')
     expect(measure).toBeTruthy()
+  })
+})
+
+// ─── Interactive mode ─────────────────────────────────────────────────────────
+
+function InteractiveChart({ onSelect }: { onSelect?: (s: import('../../types').Selection) => void }) {
+  const score = makeScore([m(1, { chords: ['C', 'Am'] })])
+  const editor = useScore(score)
+  return <ChordChart score={editor.score} editor={editor} onSelect={onSelect} />
+}
+
+describe('ChordChart (interactive)', () => {
+  it('chord elements have data-notation-id when editor is present', () => {
+    const { container } = render(<InteractiveChart />)
+    const chords = container.querySelectorAll('[data-notation-id]')
+    expect(chords.length).toBeGreaterThan(0)
+    expect(chords[0].getAttribute('data-notation-type')).toBe('chord')
+  })
+
+  it('fires onSelect when a chord is focused', () => {
+    const onSelect = vi.fn()
+    const { container } = render(<InteractiveChart onSelect={onSelect} />)
+    const chord = container.querySelector('[data-notation-id]') as HTMLElement
+    fireEvent.focus(chord)
+    expect(onSelect).toHaveBeenCalledOnce()
+    expect(onSelect.mock.calls[0][0].type).toBe('chord')
+  })
+
+  it('selected chord gets data-notation-selected attribute', () => {
+    const { container } = render(<InteractiveChart />)
+    const chord = container.querySelector('[data-notation-id]') as HTMLElement
+    fireEvent.focus(chord)
+    expect(chord.hasAttribute('data-notation-selected')).toBe(true)
+  })
+
+  it('read-only mode has no data-notation-id attributes', () => {
+    const score = makeScore([m(1, { chords: ['C'] })])
+    const { container } = render(<ChordChart score={score} />)
+    expect(container.querySelector('[data-notation-id]')).toBeNull()
   })
 })
