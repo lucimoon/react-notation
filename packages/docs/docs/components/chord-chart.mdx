@@ -2,9 +2,55 @@
 sidebar_position: 2
 ---
 
+import 'react-notation/style.css'
+import { ChordChart, createScore, createTrack, createMeasure, createChord } from 'react-notation'
+
 # ChordChart
 
 Renders a professional musician's chart: measures with chord symbols, slash notation, section labels, rehearsal marks, and bar lines. The format you'd hand to a session player.
+
+export const demoScore = createScore({
+  title: 'Autumn Leaves',
+  tempo: 120,
+  timeSignature: { beats: 4, value: 4 },
+  keySignature: { root: 'G', mode: 'major' },
+  tracks: [
+    createTrack({
+      measures: [
+        createMeasure({
+          number: 1,
+          section: 'A',
+          rehearsalMark: 'A',
+          events: [
+            createChord({ beat: 1, duration: 'half',  symbol: 'Cm7',    root: 'C', quality: 'min7' }),
+            createChord({ beat: 3, duration: 'half',  symbol: 'F7',     root: 'F', quality: 'dominant7' }),
+          ],
+        }),
+        createMeasure({
+          number: 2,
+          events: [createChord({ beat: 1, duration: 'whole', symbol: 'Bbmaj7', root: 'Bb', quality: 'maj7' })],
+        }),
+        createMeasure({
+          number: 3,
+          events: [
+            createChord({ beat: 1, duration: 'half',  symbol: 'Ebmaj7', root: 'Eb', quality: 'maj7' }),
+            createChord({ beat: 3, duration: 'half',  symbol: 'Am7b5',  root: 'A',  quality: 'min7' }),
+          ],
+        }),
+        createMeasure({
+          number: 4,
+          events: [
+            createChord({ beat: 1, duration: 'half',  symbol: 'D7',     root: 'D', quality: 'dominant7' }),
+            createChord({ beat: 3, duration: 'half',  symbol: 'Gm',     root: 'G', quality: 'minor' }),
+          ],
+          barline: 'final',
+        }),
+      ],
+    }),
+  ],
+})
+
+<ChordChart score={demoScore} measuresPerLine={4} breakAtSections showSlashes showMeasureNumbers />
 
 ## Usage
 

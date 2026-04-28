@@ -2,9 +2,59 @@
 sidebar_position: 1
 ---
 
+import 'react-notation/style.css'
+import { ChordSheet, createScore, createTrack, createMeasure, createChord, createLyric } from 'react-notation'
+
 # ChordSheet
 
 Renders chord symbols above lyrics, grouped into measures and wrapped into visual lines.
+
+export const demoScore = createScore({
+  title: 'Autumn Leaves',
+  timeSignature: { beats: 4, value: 4 },
+  keySignature: { root: 'G', mode: 'major' },
+  tracks: [
+    createTrack({
+      measures: [
+        createMeasure({
+          number: 1,
+          section: 'Verse',
+          events: [
+            createChord({ beat: 1, duration: 'half',    symbol: 'Cm7',    root: 'C', quality: 'min7' }),
+            createChord({ beat: 3, duration: 'half',    symbol: 'F7',     root: 'F', quality: 'dominant7' }),
+            createLyric({ beat: 1, duration: 'half',    text: 'The' }),
+            createLyric({ beat: 3, duration: 'half',    text: 'au-' }),
+          ],
+        }),
+        createMeasure({
+          number: 2,
+          events: [
+            createChord({ beat: 1, duration: 'whole',   symbol: 'Bbmaj7', root: 'Bb', quality: 'maj7' }),
+            createLyric({ beat: 1, duration: 'whole',   text: 'tumn' }),
+          ],
+        }),
+        createMeasure({
+          number: 3,
+          events: [
+            createChord({ beat: 1, duration: 'half',    symbol: 'Ebmaj7', root: 'Eb', quality: 'maj7' }),
+            createChord({ beat: 3, duration: 'half',    symbol: 'Am7b5',  root: 'A',  quality: 'min7' }),
+            createLyric({ beat: 1, duration: 'half',    text: 'leaves' }),
+            createLyric({ beat: 3, duration: 'half',    text: 'are' }),
+          ],
+        }),
+        createMeasure({
+          number: 4,
+          events: [
+            createChord({ beat: 1, duration: 'whole',   symbol: 'D7',     root: 'D', quality: 'dominant7' }),
+            createLyric({ beat: 1, duration: 'whole',   text: 'falling…' }),
+          ],
+        }),
+      ],
+    }),
+  ],
+})
+
+<ChordSheet score={demoScore} measuresPerLine={4} breakAtSections />
 
 ## Usage
 
