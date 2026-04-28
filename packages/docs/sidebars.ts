@@ -25,6 +25,7 @@ const sidebars: SidebarsConfig = {
       label: 'Guides',
       items: [
         'guides/getting-started',
+        'guides/editing',
         'guides/theming',
       ],
     },
