@@ -1,6 +1,9 @@
+import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { ChordChart } from './ChordChart'
 import { createScore, createTrack, createMeasure, createChord } from '../../builders'
+import { useScore } from '../../hooks/useScore'
+import type { Selection } from '../../types'
 
 const meta: Meta<typeof ChordChart> = {
   title: 'Components/ChordChart',
@@ -111,4 +114,50 @@ const bluesInBb = createScore({
 
 export const TwelveBarBlues: Story = {
   args: { score: bluesInBb, measuresPerLine: 4, breakAtSections: false, showSlashes: true, showMeasureNumbers: true },
+}
+
+// ─── Interactive / editor stories ─────────────────────────────────────────────
+
+export const Interactive: Story = {
+  parameters: { layout: 'padded' },
+  render: () => {
+    const editor = useScore(autumnLeaves)
+    const [selection, setSelection] = useState<Selection | null>(null)
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <ChordChart
+          score={editor.score}
+          editor={editor}
+          onSelect={(sel) => setSelection(sel)}
+        />
+        <pre style={{ fontSize: '0.8rem', background: '#f5f5f5', padding: '0.75rem', borderRadius: '4px' }}>
+          {selection ? JSON.stringify(selection, null, 2) : 'Tab to or click a chord to see the selection here'}
+        </pre>
+      </div>
+    )
+  },
+}
+
+export const SelectionCallbacks: Story = {
+  parameters: { layout: 'padded' },
+  render: () => {
+    const editor = useScore(autumnLeaves)
+    const [log, setLog] = useState<Array<{ event: string; payload: unknown }>>([])
+    const push = (event: string, payload: unknown) =>
+      setLog((prev) => [{ event, payload }, ...prev].slice(0, 6))
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <ChordChart
+          score={editor.score}
+          editor={editor}
+          onSelect={(sel) => push('onSelect', sel)}
+        />
+        <pre style={{ fontSize: '0.8rem', background: '#f5f5f5', padding: '0.75rem', borderRadius: '4px', minHeight: '6rem' }}>
+          {log.length > 0
+            ? log.map((e) => `[${e.event}] ${JSON.stringify(e.payload)}`).join('\n')
+            : 'Click or Tab to a chord to see selection events…'}
+        </pre>
+      </div>
+    )
+  },
 }

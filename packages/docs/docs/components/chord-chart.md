@@ -91,6 +91,26 @@ ChordChart uses the same `--notation-*` tokens as ChordSheet, plus:
 | `--notation-font-size-label` | `0.75rem` | Measure numbers and rehearsal marks |
 | `--notation-color-lyric` | `inherit` | Slash notation color |
 
+## Interactive / editor mode
+
+Pass a `ScoreEditor` (from `useScore`) to activate interactive mode — chord selection and `data-notation-*` attributes for popup anchoring.
+
+```tsx
+import { ChordChart, useScore, createScore } from 'react-notation'
+
+function Editor() {
+  const editor = useScore(initialScore)
+  return <ChordChart score={editor.score} editor={editor} onSelect={console.log} />
+}
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `editor` | `ScoreEditor` | — | Returned by `useScore`. Activates interactive mode. |
+| `onSelect` | `(sel: Selection) => void` | — | Fired when a chord is focused or clicked. |
+
+See the [Editing guide](../guides/editing) for the full `useScore` API.
+
 ## Known limitations
 
 - Only the first track is rendered.

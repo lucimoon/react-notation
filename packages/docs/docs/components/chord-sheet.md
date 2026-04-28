@@ -86,6 +86,30 @@ rely solely on `measuresPerLine`.
 
 Override via `ThemeProvider` or plain CSS.
 
+## Interactive / editor mode
+
+Pass a `ScoreEditor` (from `useScore`) to activate interactive mode — selection, keyboard navigation, and inline chord editing.
+
+```tsx
+import { ChordSheet, useScore, createScore } from 'react-notation'
+
+function Editor() {
+  const editor = useScore(initialScore)
+  return <ChordSheet score={editor.score} editor={editor} />
+}
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `editor` | `ScoreEditor` | — | Returned by `useScore`. Activates interactive mode. |
+| `inlineEdit` | `boolean` | `true` | Show built-in inline input on Enter. Set `false` to handle editing via `onEditStart`. |
+| `onSelect` | `(sel: Selection) => void` | — | Fired when an element is focused or clicked. |
+| `onEditStart` | `(sel: Selection) => void \| false` | — | Fired when editing begins. Return `false` to suppress the built-in input. |
+| `onEditCommit` | `(sel: Selection, value: string) => void` | — | Fired when an edit is committed. |
+| `onEditCancel` | `(sel: Selection) => void` | — | Fired when an edit is cancelled. |
+
+See the [Editing guide](../guides/editing) for the full API, keyboard shortcuts, and popup integration.
+
 ## Known limitations
 
 - Only the **first track** of a `MusicScore` is rendered.
