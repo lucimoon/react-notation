@@ -1,8 +1,0 @@
-node_modules
-dist
-.turbo
-.docusaurus
-build
-coverage
-*.tsbuildinfo
-.DS_Store

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkreact_notation_docs=self.webpackChunkreact_notation_docs||[]).push([[647],{1507:(e,s,r)=>{r.r(s),r.d(s,{default:()=>d});r(2155);var t=r(851),a=r(4284),c=r(2919),n=r(8782),o=r(4026),u=r(5723);function d(e){return(0,u.jsx)(a.e3,{className:(0,t.A)(c.G.wrapper.docsPages),children:(0,u.jsx)(o.A,{children:(0,n.v)(e.route.routes)})})}}}]);
