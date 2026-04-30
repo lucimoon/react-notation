@@ -17,6 +17,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
     },
+    assetsInlineLimit: 0, // emit font files as separate assets, not base64
   },
   test: {
     globals: true,

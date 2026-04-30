@@ -1,0 +1,16 @@
+/**
+ * Loads the Bravura SMuFL music font required for LeadSheet and staff
+ * primitives. Import this file once at the root of your application:
+ *
+ *   import 'react-notation/music-font.css'
+ *
+ * Alternatively, load Bravura via your own CDN or package manager and set
+ * the `--notation-music-font-family` CSS variable accordingly.
+ */
+@font-face {
+  font-family: 'Bravura';
+  src: url('./Bravura.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

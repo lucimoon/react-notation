@@ -1,0 +1,53 @@
+.notation-lead-sheet {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--notation-color-background, transparent);
+  font-family: var(--notation-font-family, Georgia, "Times New Roman", serif);
+}
+
+.notation-lead-sheet-title {
+  font-size: calc(var(--notation-font-size-base, 1rem) * 1.5);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.25em;
+}
+
+.notation-lead-sheet-composer {
+  font-size: var(--notation-font-size-base, 1rem);
+  text-align: right;
+  margin-bottom: 0.5em;
+  font-style: italic;
+}
+
+.notation-lead-sheet-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--notation-line-gap, 1.5rem);
+  width: 100%;
+}
+
+.notation-lead-sheet-staff {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Selectable elements in editor mode */
+.notation-note[tabindex],
+.notation-rest[tabindex],
+.notation-lead-sheet-chord[tabindex] {
+  cursor: pointer;
+  outline: none;
+}
+
+.notation-note[data-notation-selected='true'] > text,
+.notation-note[data-notation-selected='true'] circle,
+.notation-rest[data-notation-selected='true'] > text {
+  fill: var(--notation-color-chord, #3b82f6);
+}
+
+.notation-note[tabindex]:focus-visible > *,
+.notation-rest[tabindex]:focus-visible > * {
+  outline: 2px solid var(--notation-color-chord, #3b82f6);
+  outline-offset: 2px;
+}
