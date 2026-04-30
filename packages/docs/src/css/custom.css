@@ -1,7 +1,7 @@
 /* Bravura SMuFL music font — required by LeadSheet and staff primitives */
 @font-face {
   font-family: 'Bravura';
-  src: url('/react-notation/fonts/Bravura.woff2') format('woff2');
+  src: url('./Bravura.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;
