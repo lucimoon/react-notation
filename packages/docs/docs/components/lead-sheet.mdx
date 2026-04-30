@@ -1,0 +1,269 @@
+---
+sidebar_position: 4
+---
+
+import 'react-notation/style.css'
+import 'react-notation/music-font.css'
+import {
+  LeadSheet,
+  createScore, createTrack, createMeasure,
+  createNote, createChord, createLyric, createRest,
+} from 'react-notation'
+
+# LeadSheet
+
+Renders a single-voice melody on a treble-clef staff with chord symbols above and optional lyrics below. Uses the [Bravura](https://github.com/steinbergmedia/bravura) SMuFL font for all music glyphs.
+
+export const twinkleMelody = createScore({
+  title: 'Twinkle Twinkle Little Star',
+  composer: 'Traditional',
+  timeSignature: { beats: 4, value: 4 },
+  keySignature: { root: 'C', mode: 'major' },
+  tracks: [
+    createTrack({
+      clef: 'treble',
+      measures: [
+        createMeasure({ number: 1, events: [
+          createNote({ pitch: { step: 'C', octave: 5 }, duration: 'quarter', beat: 1 }),
+          createNote({ pitch: { step: 'C', octave: 5 }, duration: 'quarter', beat: 2 }),
+          createNote({ pitch: { step: 'G', octave: 5 }, duration: 'quarter', beat: 3 }),
+          createNote({ pitch: { step: 'G', octave: 5 }, duration: 'quarter', beat: 4 }),
+          createChord({ symbol: 'C', root: 'C', quality: 'major', beat: 1, duration: 'whole' }),
+          createLyric({ text: 'Twin', syllable: 'single', beat: 1, duration: 'quarter' }),
+          createLyric({ text: 'kle', syllable: 'single', beat: 2, duration: 'quarter' }),
+          createLyric({ text: 'twin', syllable: 'single', beat: 3, duration: 'quarter' }),
+          createLyric({ text: 'kle', syllable: 'single', beat: 4, duration: 'quarter' }),
+        ]}),
+        createMeasure({ number: 2, events: [
+          createNote({ pitch: { step: 'A', octave: 5 }, duration: 'quarter', beat: 1 }),
+          createNote({ pitch: { step: 'A', octave: 5 }, duration: 'quarter', beat: 2 }),
+          createNote({ pitch: { step: 'G', octave: 5 }, duration: 'half',    beat: 3 }),
+          createChord({ symbol: 'F', root: 'F', quality: 'major', beat: 1, duration: 'half' }),
+          createChord({ symbol: 'G', root: 'G', quality: 'major', beat: 3, duration: 'half' }),
+          createLyric({ text: 'lit', syllable: 'single', beat: 1, duration: 'quarter' }),
+          createLyric({ text: 'tle', syllable: 'single', beat: 2, duration: 'quarter' }),
+          createLyric({ text: 'star', syllable: 'single', beat: 3, duration: 'half' }),
+        ]}),
+        createMeasure({ number: 3, events: [
+          createNote({ pitch: { step: 'F', octave: 5 }, duration: 'quarter', beat: 1 }),
+          createNote({ pitch: { step: 'F', octave: 5 }, duration: 'quarter', beat: 2 }),
+          createNote({ pitch: { step: 'E', octave: 5 }, duration: 'quarter', beat: 3 }),
+          createNote({ pitch: { step: 'E', octave: 5 }, duration: 'quarter', beat: 4 }),
+          createChord({ symbol: 'C', root: 'C', quality: 'major', beat: 1, duration: 'whole' }),
+          createLyric({ text: 'How', syllable: 'single', beat: 1, duration: 'quarter' }),
+          createLyric({ text: 'I',   syllable: 'single', beat: 2, duration: 'quarter' }),
+          createLyric({ text: 'won', syllable: 'single', beat: 3, duration: 'quarter' }),
+          createLyric({ text: 'der', syllable: 'single', beat: 4, duration: 'quarter' }),
+        ]}),
+        createMeasure({ number: 4, barline: 'final', events: [
+          createNote({ pitch: { step: 'D', octave: 5 }, duration: 'quarter', beat: 1 }),
+          createNote({ pitch: { step: 'D', octave: 5 }, duration: 'quarter', beat: 2 }),
+          createNote({ pitch: { step: 'C', octave: 5 }, duration: 'half',    beat: 3 }),
+          createChord({ symbol: 'G', root: 'G', quality: 'major', beat: 1, duration: 'half' }),
+          createChord({ symbol: 'C', root: 'C', quality: 'major', beat: 3, duration: 'half' }),
+          createLyric({ text: 'what', syllable: 'single', beat: 1, duration: 'quarter' }),
+          createLyric({ text: 'you',  syllable: 'single', beat: 2, duration: 'quarter' }),
+          createLyric({ text: 'are',  syllable: 'single', beat: 3, duration: 'half' }),
+        ]}),
+      ],
+    }),
+  ],
+})
+
+<LeadSheet score={twinkleMelody} measuresPerLine={4} />
+
+## Font setup
+
+`LeadSheet` uses the [Bravura](https://github.com/steinbergmedia/bravura) SMuFL font for all
+music glyphs. Import the bundled font CSS **once** at your app root:
+
+```tsx
+import 'react-notation/music-font.css'
+```
+
+Nothing will render without it — staff lines draw fine, but all glyphs (clef, noteheads, rests,
+accidentals, time signature) will be invisible.
+
+## Usage
+
+```tsx
+import {
+  LeadSheet,
+  createScore, createTrack, createMeasure,
+  createNote, createChord, createLyric,
+} from 'react-notation'
+import 'react-notation/style.css'
+import 'react-notation/music-font.css'
+
+const score = createScore({
+  title: 'My Melody',
+  timeSignature: { beats: 4, value: 4 },
+  keySignature: { root: 'G', mode: 'major' },
+  tracks: [
+    createTrack({
+      clef: 'treble',
+      measures: [
+        createMeasure({
+          number: 1,
+          events: [
+            createNote({ pitch: { step: 'G', octave: 4 }, duration: 'quarter', beat: 1 }),
+            createNote({ pitch: { step: 'A', octave: 4 }, duration: 'quarter', beat: 2 }),
+            createNote({ pitch: { step: 'B', octave: 4 }, duration: 'half',    beat: 3 }),
+            createChord({ symbol: 'G', root: 'G', quality: 'major', beat: 1, duration: 'whole' }),
+          ],
+        }),
+      ],
+    }),
+  ],
+})
+
+<LeadSheet score={score} measuresPerLine={4} />
+```
+
+## Data model
+
+`LeadSheet` renders the first track of a `MusicScore` (or the track at `trackIndex`).
+Each `Measure` can contain a mix of event types:
+
+| Event type | Rendered as |
+|------------|-------------|
+| `Note` | Notehead on the staff at the correct pitch position, with stem, ledger lines, and optional accidental |
+| `Rest` | Rest glyph centred in the measure |
+| `Chord` | Text symbol above the staff, aligned to the event's beat |
+| `Lyric` | Text below the staff, aligned to the event's beat |
+
+Events with the same `beat` value are laid out at the same horizontal position, so a `Note`
+and a `Chord` at beat 1 will align vertically.
+
+## Pitches and accidentals
+
+Pitches are specified on the `Note.pitch` object:
+
+```ts
+// G4 — no accidental
+createNote({ pitch: { step: 'G', octave: 4 }, duration: 'quarter', beat: 1 })
+
+// F#4 — sharp rendered automatically
+createNote({ pitch: { step: 'F', octave: 4, alter: 1 }, duration: 'quarter', beat: 2 })
+
+// Bb4 — flat
+createNote({ pitch: { step: 'B', octave: 4, alter: -1 }, duration: 'quarter', beat: 3 })
+```
+
+`alter: 1` = sharp, `alter: -1` = flat, `alter: 0` = natural (explicit natural sign).
+Omitting `alter` renders no accidental symbol.
+
+## Beaming
+
+Eighth and sixteenth notes that share the same integer beat index are **automatically beamed**:
+
+```ts
+// These four notes form two beam groups (beats 1 and 2)
+createNote({ pitch: { step: 'C', octave: 5 }, duration: 'eighth', beat: 1 }),
+createNote({ pitch: { step: 'D', octave: 5 }, duration: 'eighth', beat: 1.5 }),
+createNote({ pitch: { step: 'E', octave: 5 }, duration: 'eighth', beat: 2 }),
+createNote({ pitch: { step: 'F', octave: 5 }, duration: 'eighth', beat: 2.5 }),
+```
+
+Single beamable notes on their own beat get individual flags.
+
+## Ties
+
+Set `tied: true` on a `Note` to draw a tie arc to the next note of the same pitch:
+
+```ts
+createNote({ pitch: { step: 'C', octave: 5 }, duration: 'half', beat: 1, tied: true }),
+createNote({ pitch: { step: 'C', octave: 5 }, duration: 'half', beat: 3 }),
+```
+
+## Section labels and rehearsal marks
+
+These are set on `Measure`:
+
+```ts
+createMeasure({ number: 5, section: 'Chorus', events: [...] })
+createMeasure({ number: 9, rehearsalMark: 'B', events: [...] })
+```
+
+`section` appears above the staff in italic. `rehearsalMark` appears in a box above the staff.
+When `breakAtSections` is `true` (default), a section label forces a new staff line.
+
+## Barlines
+
+Set `measure.barline` to control the barline drawn at the end of a measure:
+
+| Value | Appearance |
+|-------|------------|
+| `'single'` | Standard thin barline (default) |
+| `'double'` | Two thin lines |
+| `'final'` | Thin + thick — end of piece |
+| `'repeat-start'` | Thick + thin + dots |
+| `'repeat-end'` | Dots + thin + thick |
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `score` | `MusicScore` | — | **Required.** Score to render. |
+| `trackIndex` | `number` | `0` | Index of the track to render. |
+| `measuresPerLine` | `number` | `4` | Maximum measures per staff line. |
+| `breakAtSections` | `boolean` | `true` | Start a new line at section labels. |
+| `staffSpace` | `number` | `10` | Distance between adjacent staff lines in pixels. All sizing derives from this. |
+| `showChords` | `boolean` | `true` | Render chord symbols above the staff. |
+| `showLyrics` | `boolean` | `true` | Render lyrics below the staff. |
+| `showTitle` | `boolean` | `true` | Render score title and composer. |
+| `showMeasureNumbers` | `boolean` | `false` | Render bar numbers above each measure. |
+| `editor` | `ScoreEditor` | — | From `useScore`. Enables selection mode. |
+| `onSelect` | `(sel: Selection) => void` | — | Fired when a note, rest, or chord is clicked. |
+| `className` | `string` | — | Additional CSS class on the root `<div>`. |
+| `...rest` | `HTMLAttributes<HTMLDivElement>` | — | All standard div props forwarded. |
+
+`LeadSheet` is a `forwardRef` component.
+
+## Interactive / editor mode
+
+Pass a `ScoreEditor` (from `useScore`) to enable selection. Notes, rests, and chords become
+focusable and receive `data-notation-*` attributes:
+
+```tsx
+import { LeadSheet, useScore } from 'react-notation'
+
+function Editor() {
+  const editor = useScore(initialScore)
+  return (
+    <LeadSheet
+      score={editor.score}
+      editor={editor}
+      onSelect={(sel) => console.log('selected', sel)}
+    />
+  )
+}
+```
+
+Note input (changing pitch/duration via keyboard) is not yet supported — selection only.
+See the [editing guide](../guides/editing) for the full `useScore` API.
+
+## Theming
+
+`LeadSheet` reads these `--notation-*` CSS tokens in addition to the base tokens:
+
+| Token | Default | Controls |
+|-------|---------|----------|
+| `--notation-music-font-family` | `Bravura, serif` | Font for all SMuFL glyphs |
+| `--notation-staff-line-color` | `currentColor` | Staff lines and barlines |
+| `--notation-staff-line-width` | `1` | Staff line stroke width (px) |
+| `--notation-note-color` | `currentColor` | Noteheads, stems, beams, rests, accidentals |
+| `--notation-staff-chord-color` | `inherit` | Chord symbols above the staff |
+| `--notation-staff-lyric-color` | `inherit` | Lyrics below the staff |
+| `--notation-font-family` | `Georgia, serif` | Section labels, rehearsal marks, title |
+| `--notation-color-section-label` | `inherit` | Section label and bar number color |
+
+Override via `ThemeProvider` or plain CSS.
+
+## Known limitations
+
+- Only treble clef is supported. Bass clef, alto, and tenor are planned for M7.
+- Beat spacing is even — no proportional (optical) spacing.
+- Automatic key signature courtesy accidentals are not shown.
+- Note input / pitch editing via keyboard is deferred to M7.
+- Barre and articulation marks (staccato, accent, fermata) are not yet rendered.
