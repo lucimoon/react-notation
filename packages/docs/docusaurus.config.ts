@@ -15,6 +15,13 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  headTags: [
+    {
+      tagName: 'style',
+      attributes: {},
+      innerHTML: `@font-face{font-family:'Bravura';src:url('/react-notation/fonts/Bravura.woff2') format('woff2');font-weight:normal;font-style:normal;font-display:block;}`,
+    },
+  ],
   presets: [
     [
       'classic',
