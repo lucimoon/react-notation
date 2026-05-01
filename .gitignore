@@ -3,6 +3,7 @@ dist
 .turbo
 .docusaurus
 build
+storybook-static
 coverage
 *.tsbuildinfo
 .DS_Store
