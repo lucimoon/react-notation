@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react'
+import '../packages/core/src/fonts/music-font.css'
 
 const preview: Preview = {
   parameters: {

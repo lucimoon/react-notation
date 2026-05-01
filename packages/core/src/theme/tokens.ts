@@ -27,6 +27,20 @@ export interface ThemeTokens {
   'measure-border-width': string
   'measure-border-style': string
   'measure-border-radius': string
+
+  // Staff notation
+  /** Font family for SMuFL music glyphs (Bravura or compatible). */
+  'music-font-family': string
+  /** Color of the 5 staff lines and barlines. */
+  'staff-line-color': string
+  /** Stroke width of staff lines in px. */
+  'staff-line-width': string
+  /** Color of noteheads, stems, beams, rests, and other notation ink. */
+  'note-color': string
+  /** Color of chord symbols rendered above the staff. */
+  'staff-chord-color': string
+  /** Color of lyrics rendered below the staff. */
+  'staff-lyric-color': string
 }
 
 export const defaultTokens: ThemeTokens = {
@@ -53,4 +67,11 @@ export const defaultTokens: ThemeTokens = {
   'measure-border-width': '1px',
   'measure-border-style': 'solid',
   'measure-border-radius': '0',
+
+  'music-font-family': 'Bravura, serif',
+  'staff-line-color': 'currentColor',
+  'staff-line-width': '1',
+  'note-color': 'currentColor',
+  'staff-chord-color': 'inherit',
+  'staff-lyric-color': 'inherit',
 }

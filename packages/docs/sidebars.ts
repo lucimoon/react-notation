@@ -13,6 +13,7 @@ const sidebars: SidebarsConfig = {
         'components/chord-chart',
         'components/chord-diagram',
         'components/lead-sheet',
+        'components/staff-primitives',
         'components/tablature',
         'components/staff-notation',
         'components/player-bar',
